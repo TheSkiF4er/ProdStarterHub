@@ -1,0 +1,126 @@
+/* Tailwind layers (assuming Tailwind is configured for the project) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+ *  CSS Reset / Base
+ * ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth font rendering */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #020617; /* slate-950 */
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Remove default link styling; normalize */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Images & media should not overflow containers */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form elements inherit font */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Focus styles: rely on Tailwind ring utilities for most components */
+:focus-visible {
+  outline: none;
+}
+
+/* Better code and pre formatting */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* Basic scrollbar styling (WebKit-based browsers) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617; /* slate-950 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937; /* slate-800-ish */
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155; /* slate-700-ish */
+}
+
+/* ============================================================
+ *  Layout helpers
+ * ========================================================== */
+
+/* Utility container with max width similar to Tailwind's max-w-6xl */
+.ps-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 72rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Consistent section padding */
+.ps-section {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+/* Simple fade-in animation for hero/sections (optional) */
+@keyframes ps-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ps-fade-in-up {
+  animation: ps-fade-in-up 0.4s ease-out both;
+}
