@@ -1,1 +1,41 @@
+# ProdStarterHub pnpm workspace configuration
+# Place this file at: ./pnpm-workspace.yaml
 
+packages:
+  # Core workspace packages
+  - "cli"          # TypeScript CLI: prodstarter
+  - "website"      # Next.js / docs site (if it exists or will exist)
+
+  # Node-based templates (Next.js, Node services, etc.)
+  # PNPM will automatically ignore directories without package.json
+  - "templates/**"
+
+  # (optional) if additional packages appear, such as internal tools:
+  # - "tools/**"
+  # - "packages/**"
+
+# Unified dependency versions across the monorepo.
+# Any package.json in the workspace can specify:
+#   "typescript": "catalog:typescript"
+# Then pnpm will substitute the version from here.
+catalog:
+  # TypeScript toolchain
+  typescript: ^5.5.0
+  ts-node: ^10.9.2
+  "@types/node": ^20.0.0
+
+  # Linters and formatters
+  eslint: ^9.0.0
+  prettier: ^3.2.0
+
+  # Testing (if you decide to use Jest)
+  jest: ^29.7.0
+  "@types/jest": ^29.5.0
+
+  # Utilities
+  cross-env: ^7.0.3
+
+  # For the Next.js project (website), if needed
+  next: ^14.0.0
+  react: ^18.3.0
+  "react-dom": ^18.3.0
