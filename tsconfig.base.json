@@ -1,1 +1,125 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "ProdStarterHub base config",
 
+  "compilerOptions": {
+    /* ===========================
+     *  Target environment
+     * =========================== */
+
+    // Modern JS target, good balance between features and Node LTS compatibility
+    "target": "ES2021",
+    "lib": ["ES2021"],
+
+    // By default we target Node / CommonJS (CLI, services).
+    // Next.js / website can override this to "ESNext" + "NodeNext" in their own tsconfig.
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    "newLine": "lf",
+
+    /* ===========================
+     *  Strictness / safety
+     * =========================== */
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+
+    // Require explicit override on inherited methods/properties
+    "noImplicitOverride": true,
+
+    // More precise handling of optional properties
+    "exactOptionalPropertyTypes": true,
+
+    // Safer index access
+    "noUncheckedIndexedAccess": true,
+
+    // Don't allow falling through switch cases without break
+    "noFallthroughCasesInSwitch": true,
+
+    /* ===========================
+     *  JS / interop / modules
+     * =========================== */
+
+    // We use TS, not JS, in this repo — can be enabled if needed
+    "allowJs": false,
+    "checkJs": false,
+
+    // Convenient interop with ESM/CJS
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Allow importing JSON as modules
+    "resolveJsonModule": true,
+
+    // How TS treats files as modules
+    "moduleDetection": "auto",
+
+    // Remove unused type-only imports
+    "importsNotUsedAsValues": "remove",
+
+    /* ===========================
+     *  Emit / output
+     * =========================== */
+
+    // Emit d.ts — useful for shared utilities and the CLI
+    "declaration": true,
+    "declarationMap": true,
+
+    "sourceMap": true,
+    "inlineSources": false,
+    "removeComments": false,
+    "downlevelIteration": true,
+
+    /* ===========================
+     *  Build system
+     * =========================== */
+
+    // For this monorepo incremental is enough; composite can be enabled later
+    // if you start using project references.
+    "composite": false,
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    /* ===========================
+     *  Paths / aliases
+     * =========================== */
+
+    // Base path from the monorepo root
+    "baseUrl": ".",
+
+    // Frequently used import aliases
+    "paths": {
+      "@prodstarter/cli/*": ["cli/src/*"],
+      "@prodstarter/website/*": ["website/src/*"],
+      "@prodstarter/core/*": ["core/*"]
+    },
+
+    /* ===========================
+     *  Filesystem & perf
+     * =========================== */
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* ===========================
+     *  JSX (for Next.js / website)
+     * =========================== */
+
+    // The website (Next.js) can override lib / module / jsx,
+    // but this base value is harmless.
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+
+    /* ===========================
+     *  Global types
+     * =========================== */
+
+    // By default we target the Node environment;
+    // for browser parts (website) DOM will be added via a local tsconfig.
+    "types": ["node"]
+  }
+}
