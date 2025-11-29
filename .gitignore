@@ -1,1 +1,332 @@
+# ─────────────────────────────────────────────
+# ProdStarterHub – root .gitignore
+# Polyglot monorepo: Node/TS, Next.js, Python, Go, PHP, Ruby, .NET, Java, etc.
+# ─────────────────────────────────────────────
 
+###############################################
+# Node.js / TypeScript / pnpm / Yarn / npm
+###############################################
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# pnpm store (global cache, usually outside repo but ignore just in case)
+.pnpm-store/
+
+# TypeScript build output
+dist/
+lib/
+build/
+*.tsbuildinfo
+.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Next.js
+.next/
+out/
+.next-cache/
+
+# Vite / other bundlers (if added later)
+.vite/
+vite.config.ts.timestamp-*
+
+###############################################
+# Environment files
+###############################################
+
+.env
+.env.*
+.env.local
+.env.*.local
+*.env
+
+# Local runtime overrides
+.envrc
+.direnv/
+.venv/
+venv/
+
+###############################################
+# Logs & diagnostics
+###############################################
+
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+###############################################
+# OS & editor files
+###############################################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux / generic
+.fseventsd
+.nfs*
+
+# IDEs / editors
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+
+###############################################
+# TypeScript / JavaScript tooling
+###############################################
+
+# ESLint cache
+.eslintcache
+
+# Prettier
+.prettier-cache/
+
+# Storybook / docs generators (if used later)
+.storybook-out/
+storybook-static/
+
+###############################################
+# Python templates (FastAPI, Django, etc.)
+###############################################
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyd
+*.pkl
+*.pyo
+
+# Virtual environments
+.env.python
+venv/
+.venv/
+
+# Poetry
+.poetry/
+poetry.lock
+
+# Pip
+pip-wheel-metadata/
+.eggs/
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Coverage & test artifacts
+.pytest_cache/
+.tox/
+.mypy_cache/
+coverage.xml
+htmlcov/
+
+###############################################
+# Go templates
+###############################################
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build cache (usually in GOPATH, but ignore local artifacts)
+bin/
+cmd/*/bin/
+
+###############################################
+# PHP / Laravel templates
+###############################################
+
+# Composer
+/vendor/
+/composer.lock
+
+# Laravel specific
+storage/*
+!storage/.gitignore
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+###############################################
+# Ruby / Rails templates
+###############################################
+
+/.bundle/
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Gems
+/vendor/bundle/
+/vendor/cache/
+/*.gem
+
+# Rails specific
+*.rbc
+capybara-*.html
+.rspec
+spec/reports/
+test/tmp/
+test/version_tmp/
+tmp/pids/
+tmp/cache/
+tmp/sockets/
+public/system/
+public/assets/
+.byebug_history
+.yardoc
+_yardoc/
+
+###############################################
+# .NET / C# templates
+###############################################
+
+# Build outputs
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Bb]enchmarkDotNet.Artifacts/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+###############################################
+# Java / Kotlin / Spring Boot templates
+###############################################
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+build/
+*.gradle.kts~
+!gradle-wrapper.jar
+
+# IntelliJ / IDEA (extra safety)
+*.iml
+*.ipr
+*.iws
+
+###############################################
+# C / C++ templates
+###############################################
+
+# Build artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.lo
+*.la
+*.lai
+*.slo
+*.so
+*.so.*
+*.dylib
+*.dll
+*.out
+*.exe
+
+# CMake (if used later)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+
+###############################################
+# Docker / containers
+###############################################
+
+# Docker artifacts
+docker-compose.override.yml
+.docker/
+docker-data/
+*.tar
+
+###############################################
+# Misc / generated docs
+###############################################
+
+# Generated docs
+docs/.cache/
+docs/build/
+_site/
+*.html~
+
+# Static site generators (if website uses one later)
+.cache/
+public/
+
+###############################################
+# Monorepo-specific
+###############################################
+
+# Local tooling state
+.tmp/
+temp/
+.tmp-*
+*.tmp
+
+# Lockfiles that should not be committed at template level
+templates/**/package-lock.json
+templates/**/yarn.lock
+templates/**/pnpm-lock.yaml
+
+# Example .envs inside templates
+templates/**/.env
+templates/**/.env.*
+
+###############################################
+# End of ProdStarterHub .gitignore
+###############################################
