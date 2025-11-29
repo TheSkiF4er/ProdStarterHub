@@ -1,1 +1,70 @@
-
+{
+  "name": "prodstarterhub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo for ProdStarterHub: production-ready starter kits and templates for modern apps in any stack.",
+  "license": "MIT",
+  "author": "TheSkiF4er <coop@skif4er.ru>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/prodstarter-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/prodstarter-hub/issues"
+  },
+  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/prodstarter-hub#readme",
+  "keywords": [
+    "starter-kit",
+    "boilerplate",
+    "monorepo",
+    "typescript",
+    "node",
+    "nextjs",
+    "fastapi",
+    "go",
+    "laravel",
+    "rails",
+    "spring-boot",
+    "aspnet-core",
+    "cli",
+    "microservices",
+    "prodstarter"
+  ],
+  "engines": {
+    "node": ">=18.18.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:cli": "pnpm --filter cli dev",
+    "dev:website": "pnpm --filter website dev",
+    "build": "pnpm -r run build",
+    "build:cli": "pnpm --filter cli run build",
+    "build:website": "pnpm --filter website run build",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r --if-present lint:fix",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm -r --if-present test:watch",
+    "format": "pnpm -r --if-present format",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "clean": "pnpm -r --if-present clean",
+    "check": "pnpm lint && pnpm test && pnpm typecheck",
+    "ci": "pnpm install --frozen-lockfile && pnpm check && pnpm build"
+  },
+  "workspaces": [
+    "cli",
+    "website",
+    "templates/**"
+  ],
+  "devDependencies": {
+    "typescript": "catalog:typescript",
+    "ts-node": "catalog:ts-node",
+    "@types/node": "catalog:@types/node",
+    "eslint": "catalog:eslint",
+    "prettier": "catalog:prettier",
+    "jest": "catalog:jest",
+    "@types/jest": "catalog:@types/jest",
+    "cross-env": "catalog:cross-env"
+  }
+}
