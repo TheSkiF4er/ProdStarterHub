@@ -1,1 +1,13 @@
+# robots.txt for ProdStarterHub
+# Learn more: https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt
 
+User-agent: *
+Allow: /
+
+# Prevent crawler noise on internal or non-content paths (adjust as needed)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /_proxy/
+Disallow: /_internal/
+
+Sitemap: https://prodstarterhub.dev/sitemap.xml
