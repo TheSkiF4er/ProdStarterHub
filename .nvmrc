@@ -1,1 +1,13 @@
+# ProdStarterHub – Node.js version for nvm
+# This project targets Node.js 18 LTS to keep compatibility stable across
+# CLI, website and templates that rely on Node tooling.
+#
+# To use:
+#   nvm install
+#   nvm use
+#
+# If you upgrade this version, also update:
+#   - "engines.node" in package.json
+#   - CI workflows in .github/workflows/
 
+18.18.0
