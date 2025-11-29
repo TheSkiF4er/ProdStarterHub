@@ -1,4 +1,3 @@
-````markdown
 # Contributing to ProdStarterHub
 
 First of all: **thank you** for taking the time to contribute 🙌  
