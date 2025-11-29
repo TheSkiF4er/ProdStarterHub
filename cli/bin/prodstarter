@@ -1,1 +1,97 @@
+#!/usr/bin/env node
+/**
+ * ProdStarterHub CLI launcher
+ *
+ * This small bootstrap script is the executable that will be installed on your PATH
+ * as `prodstarter` when the package is installed globally or used via npx.
+ *
+ * Responsibilities:
+ *  - Resolve the correct CLI entry point (built JS in dist/, or TS in src/ during local dev)
+ *  - Provide a clear error message if the CLI has not been built yet
+ */
 
+const fs = require("fs");
+const path = require("path");
+
+// Directory where this script lives, e.g. <repo>/cli/bin
+const BIN_DIR = __dirname;
+// Package root is one level up from bin/
+const PKG_ROOT = path.resolve(BIN_DIR, "..");
+
+// Possible entry points, in order of preference
+const CANDIDATE_ENTRIES = [
+  // 1) Built JS entry (normal published usage)
+  path.join(PKG_ROOT, "dist", "index.js"),
+
+  // 2) TypeScript source entry (local dev with ts-node/register)
+  path.join(PKG_ROOT, "src", "index.ts"),
+];
+
+function findExistingEntry() {
+  for (const candidate of CANDIDATE_ENTRIES) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
+}
+
+function printBuildHintAndExit() {
+  // eslint-disable-next-line no-console
+  console.error("");
+  // eslint-disable-next-line no-console
+  console.error("ProdStarterHub CLI entry point was not found.");
+  // eslint-disable-next-line no-console
+  console.error("Make sure you have built the CLI before running this binary.");
+  // eslint-disable-next-line no-console
+  console.error("");
+  // eslint-disable-next-line no-console
+  console.error("From the cli/ directory or repository root, run:");
+  // eslint-disable-next-line no-console
+  console.error("  pnpm --filter cli build");
+  // eslint-disable-next-line no-console
+  console.error("");
+  // eslint-disable-next-line no-console
+  console.error("If you are working from a published package and see this message,");
+  // eslint-disable-next-line no-console
+  console.error("the package may be corrupted or missing the dist/ folder.");
+  // eslint-disable-next-line no-console
+  console.error("");
+
+  process.exitCode = 1;
+}
+
+(function bootstrap() {
+  const entry = findExistingEntry();
+
+  if (!entry) {
+    printBuildHintAndExit();
+    return;
+  }
+
+  // In local development, if we hit the TypeScript entry, try to use ts-node/register
+  if (entry.endsWith(".ts")) {
+    try {
+      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+      require("ts-node/register");
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("");
+      // eslint-disable-next-line no-console
+      console.error("TypeScript entry detected but ts-node is not available.");
+      // eslint-disable-next-line no-console
+      console.error("Please install dev dependencies and build the CLI:");
+      // eslint-disable-next-line no-console
+      console.error("  pnpm install");
+      // eslint-disable-next-line no-console
+      console.error("  pnpm --filter cli build");
+      // eslint-disable-next-line no-console
+      console.error("");
+      process.exitCode = 1;
+      return;
+    }
+  }
+
+  // eslint-disable-next-line global-require, import/no-dynamic-require
+  require(entry);
+})();
