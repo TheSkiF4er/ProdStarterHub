@@ -1,1 +1,19 @@
+/* humans.txt
+ * Who made this project?
+ * Learn more: https://humanstxt.org/
+ */
 
+Team: ProdStarterHub maintainers
+Contact: hello@prodstarterhub.dev
+GitHub: https://github.com/YOUR_GITHUB_USERNAME/PRODSTARTERHUB_REPO
+Location: Remote, worldwide
+
+/* Technology */
+
+Languages: TypeScript, JavaScript, Python, Go, PHP, Ruby, C#, Java, C, C++
+Frameworks: Next.js, FastAPI, Laravel, Rails, Spring Boot, ASP.NET Core, others
+Tools: pnpm, Node.js, Docker, GitHub Actions
+
+/* Thanks */
+
+Thanks-to: The open-source community, template contributors, and doc translators.
