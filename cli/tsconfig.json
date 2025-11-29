@@ -1,1 +1,82 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "ProdStarterHub CLI tsconfig",
 
+  // Inherit strict, shared settings and path aliases from the monorepo base.
+  "extends": "../tsconfig.base.json",
+
+  "compilerOptions": {
+    /* ============================================
+     *  Output / filesystem
+     * ========================================== */
+
+    // All compiled JS will go here
+    "outDir": "./dist",
+
+    // All source TS lives here
+    "rootDir": "./src",
+
+    // Keep CLI-specific incremental build info local to the package
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    /* ============================================
+     *  Module / runtime target
+     *  (override if CLI needs something special)
+     * ========================================== */
+
+    // Explicitly confirm CommonJS for Node-based CLI
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    // Node 18+ baseline
+    "target": "ES2021",
+    "lib": ["ES2021"],
+
+    /* ============================================
+     *  Emit behavior
+     * ========================================== */
+
+    // Don't emit JS if there are type errors
+    "noEmitOnError": true,
+
+    /* ============================================
+     *  Node / interop specifics
+     * ========================================== */
+
+    // CLI is Node-first; ensure Node types are available here
+    "types": ["node"],
+
+    // Allow importing JSON config/registry files directly
+    "resolveJsonModule": true,
+
+    /* ============================================
+     *  Build system
+     * ========================================== */
+
+    // CLI can participate in incremental builds without being a full project reference
+    "incremental": true,
+    "composite": false
+
+    // NOTE:
+    // - Strictness flags, JSX, path aliases and other shared options
+    //   are inherited from ../tsconfig.base.json.
+  },
+
+  /* ==============================================
+   *  Included / excluded files
+   * ============================================ */
+
+  "include": [
+    "src/**/*",
+    "src/**/*.d.ts"
+  ],
+
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__mocks__/**",
+    "**/__tests__/**"
+  ]
+  }
