@@ -1,1 +1,206 @@
+# ProdStarterHub – EditorConfig
+# Keep consistent coding styles across editors and IDEs
+# Docs: https://editorconfig.org
 
+root = true
+
+###########################################################
+# Global defaults
+###########################################################
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Default indentation
+indent_style = space
+indent_size = 2
+
+###########################################################
+# Markdown / prose / docs
+###########################################################
+
+[*.md]
+# Keep trailing spaces (useful for Markdown line breaks)
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+[docs/**.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+###########################################################
+# JSON / JSONC
+###########################################################
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.jsonc]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# YAML / YML (configs, CI, etc.)
+###########################################################
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.yaml]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# TypeScript / JavaScript
+###########################################################
+
+[*.ts]
+indent_style = space
+indent_size = 2
+
+[*.tsx]
+indent_style = space
+indent_size = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.jsx]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# CSS / SCSS / PostCSS
+###########################################################
+
+[*.css]
+indent_style = space
+indent_size = 2
+
+[*.scss]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# HTML / XML / Templates
+###########################################################
+
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.xml]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# Python (FastAPI, Django templates)
+###########################################################
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+###########################################################
+# Go
+###########################################################
+
+[*.go]
+indent_style = tab
+indent_size = 4
+
+###########################################################
+# PHP (Laravel templates)
+###########################################################
+
+[*.php]
+indent_style = space
+indent_size = 4
+
+###########################################################
+# Ruby (Rails templates)
+###########################################################
+
+[*.rb]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# C / C++ / Headers
+###########################################################
+
+[*.c]
+indent_style = space
+indent_size = 4
+
+[*.h]
+indent_style = space
+indent_size = 4
+
+[*.cpp]
+indent_style = space
+indent_size = 4
+
+[*.hpp]
+indent_style = space
+indent_size = 4
+
+###########################################################
+# C# / .NET
+###########################################################
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+###########################################################
+# Java / Kotlin
+###########################################################
+
+[*.java]
+indent_style = space
+indent_size = 4
+
+[*.kt]
+indent_style = space
+indent_size = 4
+
+[*.kts]
+indent_style = space
+indent_size = 4
+
+###########################################################
+# Shell scripts / Bash
+###########################################################
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+###########################################################
+# Makefile
+###########################################################
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+###########################################################
+# Git-related files
+###########################################################
+
+[*.gitconfig]
+indent_style = space
+indent_size = 2
+
+[*.gitattributes]
+indent_style = space
+indent_size = 2
