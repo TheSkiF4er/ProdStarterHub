@@ -1,1 +1,376 @@
+[
+  {
+    "id": "nextjs-saas-typescript",
+    "name": "Next.js SaaS (TypeScript)",
+    "type": "web",
+    "language": "TypeScript",
+    "framework": "Next.js",
+    "path": "templates/web/nextjs-saas-typescript",
+    "features": [
+      "web-app",
+      "saas",
+      "routing",
+      "api-routes",
+      "postgres",
+      "auth",
+      "rbac",
+      "billing",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "saas",
+      "dashboards",
+      "admin-panels"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "laravel-monolith-php",
+    "name": "Laravel Monolith (PHP)",
+    "type": "web",
+    "language": "PHP",
+    "framework": "Laravel",
+    "path": "templates/web/laravel-monolith-php",
+    "features": [
+      "web-app",
+      "monolith",
+      "blade",
+      "auth",
+      "queues",
+      "mail",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "monoliths",
+      "saas",
+      "crud-apps"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "rails-marketplace-ruby",
+    "name": "Rails Marketplace (Ruby)",
+    "type": "web",
+    "language": "Ruby",
+    "framework": "Ruby on Rails",
+    "path": "templates/web/rails-marketplace-ruby",
+    "features": [
+      "web-app",
+      "marketplace",
+      "auth",
+      "listings",
+      "orders",
+      "background-jobs",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "marketplaces",
+      "saas",
+      "prototypes"
+    ],
+    "minCliVersion": "0.1.0"
+  },
 
+  {
+    "id": "fastapi-python-api",
+    "name": "FastAPI REST API (Python)",
+    "type": "api",
+    "language": "Python",
+    "framework": "FastAPI",
+    "path": "templates/api/fastapi-python-api",
+    "features": [
+      "rest-api",
+      "openapi",
+      "jwt-auth",
+      "postgres",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "apis",
+      "microservices",
+      "backends-for-frontends"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "django-rest-python",
+    "name": "Django REST API (Python, DRF)",
+    "type": "api",
+    "language": "Python",
+    "framework": "Django REST Framework",
+    "path": "templates/api/django-rest-python",
+    "features": [
+      "rest-api",
+      "django",
+      "auth",
+      "postgres",
+      "admin",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "apis",
+      "admin-backends",
+      "monolith-backends"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "node-express-javascript",
+    "name": "Node.js REST API (Express, JavaScript)",
+    "type": "api",
+    "language": "JavaScript",
+    "framework": "Express",
+    "path": "templates/api/node-express-javascript",
+    "features": [
+      "rest-api",
+      "express",
+      "cors",
+      "logging",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "apis",
+      "microservices",
+      "prototypes"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "kotlin-springboot-api",
+    "name": "Kotlin Spring Boot API",
+    "type": "api",
+    "language": "Kotlin",
+    "framework": "Spring Boot",
+    "path": "templates/api/kotlin-springboot-api",
+    "features": [
+      "rest-api",
+      "spring-boot",
+      "postgres",
+      "profiles",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "enterprise-backend",
+      "apis",
+      "microservices"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "aspnetcore-webapi-csharp",
+    "name": "ASP.NET Core Web API (C#)",
+    "type": "api",
+    "language": "C#",
+    "framework": "ASP.NET Core",
+    "path": "templates/api/aspnetcore-webapi-csharp",
+    "features": [
+      "rest-api",
+      "minimal-apis",
+      "health-check",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "enterprise-backend",
+      "apis",
+      "microservices"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "springboot-api-java",
+    "name": "Spring Boot API (Java)",
+    "type": "api",
+    "language": "Java",
+    "framework": "Spring Boot",
+    "path": "templates/api/springboot-api-java",
+    "features": [
+      "rest-api",
+      "spring-boot",
+      "postgres",
+      "health-check",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "enterprise-backend",
+      "apis",
+      "microservices"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+
+  {
+    "id": "go-chi-rest",
+    "name": "Go REST Service (chi)",
+    "type": "service",
+    "language": "Go",
+    "framework": "chi",
+    "path": "templates/service/go-chi-rest",
+    "features": [
+      "rest-api",
+      "chi",
+      "health-check",
+      "config",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "microservices",
+      "backends",
+      "internal-tools"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "go-grpc-service",
+    "name": "Go gRPC Service",
+    "type": "service",
+    "language": "Go",
+    "framework": "gRPC",
+    "path": "templates/service/go-grpc-service",
+    "features": [
+      "grpc",
+      "service",
+      "health-check",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "microservices",
+      "service-mesh",
+      "internal-rpcs"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "node-service-typescript",
+    "name": "Node Microservice (TypeScript)",
+    "type": "service",
+    "language": "TypeScript",
+    "framework": "Node.js",
+    "path": "templates/service/node-service-typescript",
+    "features": [
+      "service",
+      "http-server",
+      "health-check",
+      "logging",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "microservices",
+      "background-services",
+      "internal-tools"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "cpp-grpc-service",
+    "name": "C++ gRPC Service",
+    "type": "service",
+    "language": "C++",
+    "framework": "gRPC",
+    "path": "templates/service/cpp-grpc-service",
+    "features": [
+      "grpc",
+      "service",
+      "high-performance",
+      "docker",
+      "tests"
+    ],
+    "recommendedFor": [
+      "high-performance-services",
+      "systems-integration",
+      "microservices"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+
+  {
+    "id": "go-cli-tool",
+    "name": "Go CLI Tool",
+    "type": "cli",
+    "language": "Go",
+    "framework": "standard-library",
+    "path": "templates/cli/go-cli-tool",
+    "features": [
+      "cli",
+      "flags",
+      "logging",
+      "tests"
+    ],
+    "recommendedFor": [
+      "cli-tools",
+      "dev-tools",
+      "automation"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "c-cli-tool",
+    "name": "C CLI Tool",
+    "type": "cli",
+    "language": "C",
+    "framework": "standard-library",
+    "path": "templates/cli/c-cli-tool",
+    "features": [
+      "cli",
+      "argv",
+      "simple-binary"
+    ],
+    "recommendedFor": [
+      "systems-tools",
+      "embedded-support",
+      "low-level-utilities"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "csharp-cli-tool",
+    "name": "C# CLI Tool (.NET)",
+    "type": "cli",
+    "language": "C#",
+    "framework": ".NET",
+    "path": "templates/cli/csharp-cli-tool",
+    "features": [
+      "cli",
+      "args-parsing",
+      "console-app",
+      "tests"
+    ],
+    "recommendedFor": [
+      "cli-tools",
+      "internal-utilities",
+      "automation"
+    ],
+    "minCliVersion": "0.1.0"
+  },
+  {
+    "id": "java-cli-tool",
+    "name": "Java CLI Tool",
+    "type": "cli",
+    "language": "Java",
+    "framework": "standard-library",
+    "path": "templates/cli/java-cli-tool",
+    "features": [
+      "cli",
+      "args-parsing",
+      "console-app",
+      "tests"
+    ],
+    "recommendedFor": [
+      "cli-tools",
+      "cross-platform-tools",
+      "internal-utilities"
+    ],
+    "minCliVersion": "0.1.0"
+  }
+]
