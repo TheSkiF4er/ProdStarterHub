@@ -1,4 +1,3 @@
-````markdown
 <h1 align="center">ProdStarterHub</h1>
 
 <p align="center">
