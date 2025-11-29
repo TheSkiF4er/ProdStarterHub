@@ -1,1 +1,257 @@
-
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://prodstarterhub.dev/schemas/template.schema.json",
+  "title": "ProdStarterHub Template Metadata Schema",
+  "description": "Schema describing metadata for a ProdStarterHub starter template. Used both by per-template `template.json` files and by entries in `core/templates-registry.json`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "type",
+    "language",
+    "framework",
+    "features",
+    "recommendedFor",
+    "minCliVersion"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique template identifier, kebab-case. Should match the folder name, e.g. `nextjs-saas-typescript`."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Human-friendly template name, e.g. `Next.js SaaS (TypeScript)`."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "web",
+        "api",
+        "service",
+        "cli"
+      ],
+      "description": "High-level category of the template: web app, API backend, service/microservice, or CLI tool."
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "Go",
+        "PHP",
+        "Ruby",
+        "Kotlin",
+        "C#",
+        "Java",
+        "C",
+        "C++",
+        "Other"
+      ],
+      "description": "Primary implementation language of the template."
+    },
+    "framework": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary framework, runtime, or technology, e.g. `Next.js`, `FastAPI`, `Django REST Framework`, `Laravel`, `Rails`, `Spring Boot`, `ASP.NET Core`, `chi`, `gRPC`."
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Relative path from the repository root to the template directory, e.g. `templates/web/nextjs-saas-typescript`. Required in `templates-registry.json`, optional in per-template `template.json`."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of what this template is and when to use it."
+    },
+    "features": {
+      "type": "array",
+      "description": "Key features provided by this template: technology, capabilities, integrations.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "recommendedFor": {
+      "type": "array",
+      "description": "Typical use cases or domains this template is recommended for, e.g. `saas`, `marketplaces`, `microservices`, `cli-tools`.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "tags": {
+      "type": "array",
+      "description": "Additional free-form tags to help categorize or filter templates.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "complexity": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "description": "Approximate complexity level of the template."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "alpha",
+        "beta",
+        "stable",
+        "deprecated"
+      ],
+      "default": "alpha",
+      "description": "Lifecycle status of the template within ProdStarterHub."
+    },
+    "minCliVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-.]+)?(\\+[0-9A-Za-z-.]+)?$",
+      "description": "Minimum ProdStarterHub CLI version required to use this template, in semver format (e.g. `0.1.0`)."
+    },
+    "runtime": {
+      "type": "object",
+      "description": "Optional runtime requirements specific to this template.",
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string",
+          "description": "Node.js version range if the template depends on Node tooling (e.g. for web/JS templates)."
+        },
+        "python": {
+          "type": "string",
+          "description": "Python version range, e.g. `>=3.10`."
+        },
+        "go": {
+          "type": "string",
+          "description": "Go version range, e.g. `>=1.22`."
+        },
+        "dotnet": {
+          "type": "string",
+          "description": ".NET SDK version, e.g. `>=8.0`."
+        },
+        "java": {
+          "type": "string",
+          "description": "Java version or range, e.g. `>=17`."
+        },
+        "php": {
+          "type": "string",
+          "description": "PHP version or range, e.g. `>=8.1`."
+        },
+        "ruby": {
+          "type": "string",
+          "description": "Ruby version or range, e.g. `>=3.2`."
+        }
+      }
+    },
+    "docs": {
+      "type": "object",
+      "description": "Relative paths to documentation files that should exist in the template directory.",
+      "additionalProperties": false,
+      "properties": {
+        "readme": {
+          "type": "string",
+          "description": "Path to the main README for the template, default `README.md`."
+        },
+        "tutorial": {
+          "type": "string",
+          "description": "Path to the step-by-step tutorial, default `TUTORIAL.md`."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "Path to the architecture overview, default `ARCHITECTURE.md`."
+        },
+        "tasks": {
+          "type": "string",
+          "description": "Path to the practice tasks file, default `TASKS.md`."
+        }
+      }
+    },
+    "docker": {
+      "type": "object",
+      "description": "Information about Docker support for this template.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether Docker support is included in this template."
+        },
+        "composeFile": {
+          "type": "string",
+          "description": "Relative path to a `docker-compose` file if present."
+        },
+        "dockerfile": {
+          "type": "string",
+          "description": "Relative path to the main `Dockerfile` if present."
+        }
+      }
+    },
+    "scaffolding": {
+      "type": "object",
+      "description": "Optional hints for the CLI about how to scaffold this template.",
+      "additionalProperties": false,
+      "properties": {
+        "variables": {
+          "type": "array",
+          "description": "Template variables supported for substitution (e.g. `PROJECT_NAME`, `PACKAGE_NAME`).",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "supportsNonInteractive": {
+          "type": "boolean",
+          "description": "Whether this template can be fully configured non-interactively via CLI flags."
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp indicating when this template was originally added."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp indicating when this template definition was last updated."
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "Optional list of maintainers responsible for this template.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Maintainer's display name or handle."
+          },
+          "github": {
+            "type": "string",
+            "description": "GitHub username of the maintainer, without the '@'."
+          }
+        }
+      }
+    }
+  }
+}
