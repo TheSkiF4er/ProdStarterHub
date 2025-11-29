@@ -5,7 +5,7 @@
 
 Team: ProdStarterHub maintainers
 Contact: hello@prodstarterhub.dev
-GitHub: https://github.com/YOUR_GITHUB_USERNAME/PRODSTARTERHUB_REPO
+GitHub: https://github.com/TheSkiF4er/ProdStarterHub
 Location: Remote, worldwide
 
 /* Technology */
