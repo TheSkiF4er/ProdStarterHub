@@ -7,12 +7,12 @@
      *  Target environment
      * =========================== */
 
-    // Modern JS target, good balance between features and Node LTS compatibility
+    // Современный JS-таргет, нормальный баланс между возможностями и совместимостью Node LTS
     "target": "ES2021",
     "lib": ["ES2021"],
 
-    // By default we target Node / CommonJS (CLI, services).
-    // Next.js / website can override this to "ESNext" + "NodeNext" in their own tsconfig.
+    // Базово ориентируемся на Node / CommonJS (CLI, сервисы).
+    // next.js / website смогут переопределить это на "ESNext" + "NodeNext" в своём tsconfig.
     "module": "CommonJS",
     "moduleResolution": "Node",
 
@@ -28,44 +28,44 @@
     "noImplicitThis": true,
     "useUnknownInCatchVariables": true,
 
-    // Require explicit override on inherited methods/properties
+    // Требовать явное override у наследуемых методов/свойств
     "noImplicitOverride": true,
 
-    // More precise handling of optional properties
+    // Более точная работа с необязательными полями
     "exactOptionalPropertyTypes": true,
 
-    // Safer index access
+    // Более безопасное обращение по индексам
     "noUncheckedIndexedAccess": true,
 
-    // Don't allow falling through switch cases without break
+    // Не даём падать сквозь case'ы без break
     "noFallthroughCasesInSwitch": true,
 
     /* ===========================
      *  JS / interop / modules
      * =========================== */
 
-    // We use TS, not JS, in this repo — can be enabled if needed
+    // В этом репо пишем на TS, а не на JS — можно включить при необходимости
     "allowJs": false,
     "checkJs": false,
 
-    // Convenient interop with ESM/CJS
+    // Удобная работа с ESM/CJS
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    // Allow importing JSON as modules
+    // Позволяет импортировать JSON как модули
     "resolveJsonModule": true,
 
-    // How TS treats files as modules
+    // Как TS трактует файлы как модули
     "moduleDetection": "auto",
 
-    // Remove unused type-only imports
+    // Удаляем неиспользуемые импорты на уровне type-only
     "importsNotUsedAsValues": "remove",
 
     /* ===========================
      *  Emit / output
      * =========================== */
 
-    // Emit d.ts — useful for shared utilities and the CLI
+    // Генерировать d.ts — полезно для шареных утилит и CLI
     "declaration": true,
     "declarationMap": true,
 
@@ -78,8 +78,8 @@
      *  Build system
      * =========================== */
 
-    // For this monorepo incremental is enough; composite can be enabled later
-    // if you start using project references.
+    // Для monorepo достаточно incremental; composite можно включить позже,
+    // если будешь делать project references.
     "composite": false,
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo",
@@ -88,10 +88,10 @@
      *  Paths / aliases
      * =========================== */
 
-    // Base path from the monorepo root
+    // Базовый путь из корня монорепы
     "baseUrl": ".",
 
-    // Frequently used import aliases
+    // Часто используемые алиасы для импортов
     "paths": {
       "@prodstarter/cli/*": ["cli/src/*"],
       "@prodstarter/website/*": ["website/src/*"],
@@ -106,11 +106,11 @@
     "skipLibCheck": true,
 
     /* ===========================
-     *  JSX (for Next.js / website)
+     *  JSX (для Next.js / website)
      * =========================== */
 
-    // The website (Next.js) can override lib / module / jsx,
-    // but this base value is harmless.
+    // Website (Next.js) может переопределить lib / module / jsx,
+    // но базовое значение не помешает.
     "jsx": "preserve",
     "jsxImportSource": "react",
 
@@ -118,8 +118,8 @@
      *  Global types
      * =========================== */
 
-    // By default we target the Node environment;
-    // for browser parts (website) DOM will be added via a local tsconfig.
+    // По умолчанию ориентируемся на node-среду;
+    // для браузерных частей (website) будет добавлен DOM через локальный tsconfig.
     "types": ["node"]
   }
 }
