@@ -1,4 +1,3 @@
-````markdown
 # Pull Request Template – ProdStarterHub 🧩
 
 Thank you for contributing to **ProdStarterHub**!  
