@@ -1,1 +1,141 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "ProdStarterHub website (Next.js / React) tsconfig",
 
+  // Inherit strict, shared options and monorepo path aliases
+  "extends": "../tsconfig.base.json",
+
+  "compilerOptions": {
+    /* ============================================
+     *  Target environment (browser + Node)
+     * ========================================== */
+
+    // Modern JS output for Next.js / browsers
+    "target": "ES2021",
+
+    // DOM + modern JS libs for the website
+    "lib": ["DOM", "DOM.Iterable", "ES2021"],
+
+    // ESM for Next.js / bundlers
+    "module": "ESNext",
+
+    // NodeNext resolution so TS understands ESM-style imports in Next.js
+    "moduleResolution": "NodeNext",
+
+    // Keep line endings consistent in the repo
+    "newLine": "lf",
+
+    /* ============================================
+     *  JSX / React
+     * ========================================== */
+
+    // Next.js expects JSX to be preserved for its own transform
+    "jsx": "preserve",
+
+    // For React 17+/18 with the new JSX transform (when used)
+    "jsxImportSource": "react",
+
+    /* ============================================
+     *  Strictness / safety
+     *  (most flags inherited from tsconfig.base)
+     * ========================================== */
+
+    // We keep strict mode enabled via base config.
+    // Any website-specific relaxations can go here if needed.
+
+    /* ============================================
+     *  Interop / modules / JS support
+     * ========================================== */
+
+    // Allow importing JS files where useful (e.g. config files, legacy code)
+    "allowJs": true,
+    "checkJs": false,
+
+    // Already enabled in base config, but fine to be explicit here
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "auto",
+
+    /* ============================================
+     *  Paths / aliases (website-level)
+     * ========================================== */
+
+    // For website source code, we usually keep everything under ./src
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+
+      // Monorepo shared aliases from base config remain valid:
+      "@prodstarter/cli/*": ["../cli/src/*"],
+      "@prodstarter/website/*": ["src/*"],
+      "@prodstarter/core/*": ["../core/*"]
+    },
+
+    /* ============================================
+     *  Types & global declarations
+     * ========================================== */
+
+    // Extend base `types` instead of overriding completely when possible.
+    // Next.js provides its own type packages which we include here.
+    "types": [
+      "node",
+      "jest",
+      "next",
+      "next/types/global",
+      "next/image-types"
+    ],
+
+    /* ============================================
+     *  Emit / output
+     * ========================================== */
+
+    // Next.js handles compilation/emit; TS here is mostly for type-checking.
+    "noEmit": true,
+
+    "sourceMap": true,
+    "inlineSources": false,
+    "removeComments": false,
+    "downlevelIteration": true,
+
+    /* ============================================
+     *  Build system
+     * ========================================== */
+
+    // Use incremental type-checking for faster `tsc --noEmit` runs
+    "incremental": true,
+    "composite": false,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+
+    /* ============================================
+     *  Filesystem & perf
+     * ========================================== */
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+
+  /* ==============================================
+   *  Included / excluded files
+   * ============================================ */
+
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/__tests__/**",
+    "**/__mocks__/**"
+  ]
+  }
