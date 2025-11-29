@@ -1,4 +1,3 @@
-````markdown
 ---
 name: 🐛 Bug report
 about: Report a reproducible problem in the CLI, templates, or docs
