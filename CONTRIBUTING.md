@@ -504,7 +504,3 @@ We will work with you to responsibly address the issue.
 
 Thank you again for helping build **ProdStarterHub** 💛
 Every contribution — code, docs, templates, translations, feedback — makes it more useful for developers everywhere.
-
-```
-::contentReference[oaicite:0]{index=0}
-```
