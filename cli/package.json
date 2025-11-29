@@ -1,1 +1,84 @@
-
+{
+  "name": "prodstarter",
+  "version": "0.1.0",
+  "description": "ProdStarterHub CLI – scaffold production-ready starter templates for modern stacks (web, API, service, CLI) in seconds.",
+  "private": false,
+  "license": "MIT",
+  "author": "TheSkiF4er <coop@skif4er.ru>",
+  "homepage": "https://github.com/TheSkiF4er/ProdStarterHub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheSkiF4er/ProdStarterHub.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/TheSkiF4er/ProdStarterHub/issues"
+  },
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "templates",
+    "starter",
+    "monorepo",
+    "typescript",
+    "node",
+    "nextjs",
+    "fastapi",
+    "go",
+    "laravel",
+    "rails",
+    "spring-boot",
+    "aspnet-core",
+    "microservices",
+    "prodstarter",
+    "prodstarterhub"
+  ],
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "bin": {
+    "prodstarter": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf dist .tsbuildinfo",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepare": "pnpm build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.3.7",
+    "ora": "^8.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/jest": "catalog:@types/jest",
+    "@types/node": "catalog:@types/node",
+    "@types/ora": "^3.2.0",
+    "@types/yargs": "^17.0.32",
+    "eslint": "catalog:eslint",
+    "jest": "catalog:jest",
+    "prettier": "catalog:prettier",
+    "rimraf": "^5.0.10",
+    "ts-jest": "^29.2.5",
+    "ts-node": "catalog:ts-node",
+    "typescript": "catalog:typescript"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
