@@ -1,0 +1,25 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="320" height="64" viewBox="0 0 320 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ps-logo-grad" x1="0" y1="64" x2="160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"></stop>
+      <stop offset="1" stop-color="#22C55E"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon -->
+  <rect x="4" y="8" width="48" height="48" rx="14" fill="#020617"></rect>
+  <rect x="4" y="8" width="48" height="48" rx="14" stroke="url(#ps-logo-grad)" stroke-width="2"></rect>
+
+  <path d="M16 48V20H30C34.4183 20 38 23.5817 38 28C38 32.4183 34.4183 36 30 36H22V48H16ZM22 30H29.3C32.0899 30 34.35 27.7399 34.35 24.95C34.35 22.1601 32.0899 19.9 29.3 19.9H22V30Z" fill="#F9FAFB"></path>
+  <path d="M42 20H47C50.3137 20 53 22.6863 53 26C53 29.3137 50.3137 32 47 32H45V48H42V20ZM47 30C49.2091 30 51 28.2091 51 26C51 23.7909 49.2091 22 47 22H45V30H47Z" fill="#F9FAFB"></path>
+
+  <!-- Wordmark -->
+  <text x="64" y="30" fill="#F9FAFB" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif" font-size="20" font-weight="600">
+    ProdStarter<tspan fill="#0EA5E9">Hub</tspan>
+  </text>
+
+  <text x="64" y="46" fill="#64748B" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif" font-size="11">
+    Production-ready starter kits for modern stacks
+  </text>
+</svg>

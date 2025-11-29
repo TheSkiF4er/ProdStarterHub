@@ -1,0 +1,16 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ps-grad" x1="0" y1="64" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"></stop>
+      <stop offset="1" stop-color="#22C55E"></stop>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="#020617"></rect>
+  <rect x="4" y="4" width="56" height="56" rx="16" stroke="url(#ps-grad)" stroke-width="2"></rect>
+
+  <!-- PS monogram -->
+  <path d="M20 44V20H32C36.4183 20 40 23.5817 40 28C40 32.4183 36.4183 36 32 36H24V44H20ZM24 32H31.5C34.5376 32 37 29.5376 37 26.5C37 23.4624 34.5376 21 31.5 21H24V32Z" fill="#F9FAFB"></path>
+  <path d="M44 20H48C51.3137 20 54 22.6863 54 26C54 29.3137 51.3137 32 48 32H46V44H44V20ZM48 30C50.2091 30 52 28.2091 52 26C52 23.7909 50.2091 22 48 22H46V30H48Z" fill="#F9FAFB"></path>
+</svg>
