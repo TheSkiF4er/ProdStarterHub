@@ -1,1 +1,71 @@
+name: Lint
 
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+# Avoid running multiple lint workflows in parallel for the same ref
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_ENV: development
+
+jobs:
+  lint:
+    name: Lint (monorepo)
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [18.x] # Keep in sync with .nvmrc and package.json "engines"
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      # 3. Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      # 4. Install dependencies
+      # Use frozen lockfile once you have a committed pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. Run main lint script across workspace
+      - name: Run lint
+        run: pnpm lint
+
+      # 6. Optional: run per-package lint if you want more granularity
+      # (uncomment and adjust if needed)
+      # - name: Lint CLI
+      #   run: pnpm --filter cli lint
+      #
+      # - name: Lint website
+      #   if: hashFiles('website/package.json') != ''
+      #   run: pnpm --filter website lint
+
+      # 7. Optional: format check (Prettier) if you have "format:check" scripts
+      # - name: Check formatting
+      #   run: pnpm -r --if-present format:check
