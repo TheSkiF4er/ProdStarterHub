@@ -1,1 +1,138 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": [ "WebAPI", "Django", "Python", "REST", "microservice", "prod" ],
+  "identity": "ProdStarter.Django.Rest.Python",
+  "name": "ProdStarterHub - Django REST Service (Python)",
+  "shortName": "prodstarter-django",
+  "tags": {
+    "language": "Python",
+    "type": "project"
+  },
+  "sourceName": "prodstarter_django",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Django",
+  "shortDescription": "A production-ready Django REST template with DRF, Celery scaffolding, Docker, health checks, and best-practice defaults.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter_django",
+      "description": "The Python package name and project folder for the scaffolded service.",
+      "defaultValue": "myservice"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for template metadata and headers.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization name used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "MIT", "Apache-2.0", "Proprietary" ],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "PythonVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "3.10", "3.11", "3.12" ],
+      "description": "Python runtime version to target.",
+      "defaultValue": "3.11"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include production-ready multi-stage Dockerfile and docker-compose for local development.",
+      "defaultValue": true
+    },
+    "IncludeKubernetesManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include basic Kubernetes manifests and Helm chart scaffold.",
+      "defaultValue": false
+    },
+    "IncludeCelery": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Celery scaffolding (worker, beat) and example tasks.",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry scaffolding for tracing and metrics.",
+      "defaultValue": false
+    },
+    "IncludeGithubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a GitHub Actions workflow for build/test/publish.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include pytest scaffold and example unit/integration tests.",
+      "defaultValue": true
+    },
+    "RootPackage": {
+      "type": "computed",
+      "compute": "{ProjectName}"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "pip-install-venv-0001",
+      "description": "Create virtual environment and install dependencies (optional).",
+      "manualInstructions": [
+        {
+          "text": "Create a virtual environment and install dependencies: `python -m venv .venv && source .venv/bin/activate && pip install -r src/requirements.txt`"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"python -m venv .venv && . .venv/bin/activate && pip install -r src/requirements.txt || true\""
+      }
+    },
+    {
+      "actionId": "git-init-0002",
+      "description": "Initialize a git repository and make initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Django template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Django template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/manage.py"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy the template folder and replace placeholders or integrate with your template engine.",
+    "usageExamples": [
+      "# Copy template folder and rename\ncp -R prodstarter_django myservice && cd myservice",
+      "# Or use a template engine to replace 'prodstarter_django' with your project name"
+    ]
+  },
+  "replaces": {
+    "prodstarter_django": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
