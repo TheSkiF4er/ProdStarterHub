@@ -218,3 +218,7 @@ Before first production deployment, ensure:
 * EF Core docs — migrations and best practices
 * OpenTelemetry — tracing and metrics
 * Twelve-Factor App principles
+
+---
+
+> This ARCHITECTURE.md is intentionally opinionated — it aims to provide a pragmatic, secure, and maintainable baseline for production services. Customize where needed, but keep the core principles (statelessness, observability, security, and testability) intact.
