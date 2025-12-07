@@ -1,1 +1,138 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": [ "WebAPI", "FastAPI", "Python", "async", "microservice", "prod" ],
+  "identity": "ProdStarter.FastAPI.Python",
+  "name": "ProdStarterHub - FastAPI (Python)",
+  "shortName": "prodstarter-fastapi",
+  "tags": {
+    "language": "Python",
+    "type": "project"
+  },
+  "sourceName": "prodstarter_fastapi",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.FastAPI",
+  "shortDescription": "Production-ready FastAPI template with structured logging, metrics, health checks, OpenAPI, and best-practice defaults.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter_fastapi",
+      "description": "The project name and Python package name for the scaffolded service.",
+      "defaultValue": "myfastapi"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for template metadata and headers.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organisation name used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "MIT", "Apache-2.0", "Proprietary" ],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "PythonVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "3.10", "3.11", "3.12" ],
+      "description": "Python runtime version to target.",
+      "defaultValue": "3.11"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a production-ready multi-stage Dockerfile and docker-compose for local development.",
+      "defaultValue": true
+    },
+    "IncludeKubernetesManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include basic Kubernetes manifests and Helm chart scaffold.",
+      "defaultValue": false
+    },
+    "IncludeCelery": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Celery (or worker) scaffolding for background tasks.",
+      "defaultValue": false
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry scaffolding for tracing and metrics.",
+      "defaultValue": false
+    },
+    "IncludeGithubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a GitHub Actions workflow for build/test/publish.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include pytest scaffold and example tests.",
+      "defaultValue": true
+    },
+    "RootPackage": {
+      "type": "computed",
+      "compute": "{ProjectName}"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "venv-install-0001",
+      "description": "Create a virtual environment and install dependencies (optional).",
+      "manualInstructions": [
+        {
+          "text": "Create venv and install dependencies: `python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt || true\""
+      }
+    },
+    {
+      "actionId": "git-init-0002",
+      "description": "Initialize a git repository and perform initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub FastAPI template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub FastAPI template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "app/main.py"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy the template folder and replace placeholders or integrate with your template engine.",
+    "usageExamples": [
+      "# Copy template folder and rename\ncp -R prodstarter_fastapi myservice && cd myservice",
+      "# Then edit settings and run\npython -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt"
+    ]
+  },
+  "replaces": {
+    "prodstarter_fastapi": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
