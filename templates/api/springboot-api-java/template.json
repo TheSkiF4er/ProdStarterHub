@@ -1,1 +1,158 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["WebAPI", "Java", "Spring Boot", "JVM", "microservice", "prod"],
+  "identity": "ProdStarter.SpringBoot.Java",
+  "name": "ProdStarterHub - Spring Boot (Java) API",
+  "shortName": "prodstarter-springboot-java",
+  "tags": {
+    "language": "Java",
+    "type": "project"
+  },
+  "sourceName": "com.prodstarter",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.SpringBoot",
+  "shortDescription": "Production-ready Spring Boot (Java) template with Micrometer, Actuator, Flyway, OpenAPI and sensible defaults for cloud deployments.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter",
+      "description": "The artifact/project name for the scaffolded service.",
+      "defaultValue": "my-service"
+    },
+    "GroupId": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Maven/Gradle groupId (root package).",
+      "defaultValue": "com.example"
+    },
+    "ArtifactId": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Maven/Gradle artifactId.",
+      "defaultValue": "my-service"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization name used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "Apache-2.0"
+    },
+    "JavaVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["17", "21"],
+      "description": "Target Java version for the project.",
+      "defaultValue": "17"
+    },
+    "BuildTool": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["gradle", "maven"],
+      "description": "Preferred build tool for the generated project.",
+      "defaultValue": "gradle"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a production-ready multi-stage Dockerfile and docker-compose for local development.",
+      "defaultValue": true
+    },
+    "IncludeKubernetesManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include basic Kubernetes manifests and a Helm chart scaffold.",
+      "defaultValue": false
+    },
+    "IncludeFlyway": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Flyway migration scaffold and sample migration scripts.",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry bootstrap/config and example exporter configuration.",
+      "defaultValue": false
+    },
+    "IncludeGithubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for CI (build/test) and optional image publish.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include sample unit and integration test scaffolding (JUnit5 + Testcontainers).",
+      "defaultValue": true
+    },
+    "PackageRoot": {
+      "type": "computed",
+      "compute": "{GroupId}"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "build-0001",
+      "description": "Run build using the chosen build tool to verify the scaffolded project",
+      "manualInstructions": [
+        {
+          "text": "Run './gradlew clean build' or './mvnw -q clean package' in the project root to verify the generated project builds successfully."
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${BuildTool}\" = \"gradle\" ]; then ./gradlew clean build || true; else ./mvnw -q clean package || true; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0002",
+      "description": "Initialize a git repository and perform initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Spring Boot Java template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Spring Boot Java template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/main/java/com/prodstarter/Application.java"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy template, set GroupId/ArtifactId/ProjectName and run the build tool. Replace tokens in package declarations if needed.",
+    "usageExamples": [
+      "# Copy template and rename project\ncp -R springboot-api-java my-service && cd my-service",
+      "# Build\n./gradlew clean build"
+    ]
+  },
+  "replaces": {
+    "com.prodstarter": "{GroupId}",
+    "ProdStarterHub": "{Company}",
+    "prodstarter": "{ProjectName}"
+  }
+}
