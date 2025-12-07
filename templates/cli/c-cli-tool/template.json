@@ -1,1 +1,129 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["CLI", "C", "tool", "native", "prod"],
+  "identity": "ProdStarter.C.Cli",
+  "name": "ProdStarterHub - C CLI Tool",
+  "shortName": "prodstarter-ccli",
+  "tags": {
+    "language": "C",
+    "type": "project"
+  },
+  "sourceName": "prodstarter-cli",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.C",
+  "shortDescription": "A portable, production-ready C CLI template with sensible defaults for argument parsing, logging, graceful shutdown and packaging.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter-cli",
+      "description": "The project/binary name for the scaffolded CLI.",
+      "defaultValue": "my-cli"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "CStandard": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["c11", "c99"],
+      "description": "C language standard to target (used in Makefile/CI).",
+      "defaultValue": "c11"
+    },
+    "BuildTool": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["make", "cmake"],
+      "description": "Build system to scaffold (Makefile or CMake).",
+      "defaultValue": "make"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a reproducible multi-stage Dockerfile for building and packaging the CLI.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include unit-test scaffolding (cmocka or Unity) and example tests.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions CI workflows for build, test and sanitizers.",
+      "defaultValue": true
+    },
+    "PlatformTargets": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Comma-separated target platforms for CI matrix (linux, macos).",
+      "defaultValue": "linux,macos"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "build-0001",
+      "description": "Run a build using the chosen build tool to verify the scaffolded project",
+      "manualInstructions": [
+        {
+          "text": "Run 'make build' or follow CMake instructions in the project root to verify the generated project builds successfully."
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${BuildTool}\" = \"make\" ]; then make build || true; else mkdir -p build && cmake -S . -B build && cmake --build build --config Release || true; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0002",
+      "description": "Initialize a git repository and perform initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub C CLI template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub C CLI template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/main.c"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy template and adjust ProjectName/Author/License. Build with Make or CMake. Run tests via provided targets.",
+    "usageExamples": [
+      "# Copy template and rename\ncp -R c-cli-tool my-cli && cd my-cli",
+      "# Build\nmake build"
+    ]
+  },
+  "replaces": {
+    "prodstarter-cli": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
