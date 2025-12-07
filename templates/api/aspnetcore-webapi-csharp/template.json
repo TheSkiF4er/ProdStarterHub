@@ -1,1 +1,132 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": [ "WebAPI", "ASP.NET Core", "C#", "microservice", "prod" ],
+  "identity": "ProdStarter.AspNetCore.WebApi.CSharp",
+  "name": "ProdStarterHub - ASP.NET Core Web API (C#)",
+  "shortName": "prodstarter-api",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ProdStarter.Api",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.AspNetCore",
+  "shortDescription": "A production-ready ASP.NET Core Web API template with Serilog, health checks, Swagger, API versioning and best-practice defaults.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "ProdStarter.Api",
+      "description": "The project name and root namespace for the scaffolded service.",
+      "defaultValue": "MyService.Api"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for template metadata and headers.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization name used in namespaces and docs.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "MIT", "Apache-2.0", "Proprietary" ],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "TargetFramework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "net7.0", "net8.0" ],
+      "description": "Target framework for the generated project.",
+      "defaultValue": "net7.0"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a production-ready multi-stage Dockerfile and docker-compose for local dev.",
+      "defaultValue": true
+    },
+    "IncludeKubernetesManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include basic Kubernetes manifests and Helm chart scaffold.",
+      "defaultValue": false
+    },
+    "IncludeEFCore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Scaffold EF Core DbContext and sample model/migrations.",
+      "defaultValue": false
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Enable OpenTelemetry tracing/metrics scaffolding.",
+      "defaultValue": false
+    },
+    "IncludeGithubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a GitHub Actions workflow for build/test/publish.",
+      "defaultValue": true
+    },
+    "RootNamespace": {
+      "type": "computed",
+      "compute": "{ProjectName}"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "1f3d3f23-9f90-4a4f-8b3d-3a8c9b7b9d8a",
+      "description": "Restore NuGet packages",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore' to restore NuGet packages"
+        }
+      ],
+      "continueOnError": false,
+      "args": {
+        "executable": "dotnet",
+        "args": "restore"
+      }
+    },
+    {
+      "actionId": "8a5c6f42-5238-4b2f-ae7a-1fc1e3d7b2a7",
+      "description": "Initialize a git repository",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/ProdStarter.Api/ProdStarter.Api.csproj"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: 'dotnet new prodstarter-api -n MyService.Api --Author "Your Name" --Company "YourOrg"'",
+    "usageExamples": [
+      "dotnet new prodstarter-api -n MyService.Api --Author \"Jane Doe\" --Company \"Acme\" --IncludeDocker true --IncludeEFCore true",
+      "dotnet new prodstarter-api -n Order.Service.Api --TargetFramework net8.0 --License Apache-2.0"
+    ]
+  },
+  "replaces": {
+    "ProdStarter.Api": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
