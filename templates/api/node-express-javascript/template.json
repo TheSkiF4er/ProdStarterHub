@@ -1,1 +1,138 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["WebAPI", "Node", "Express", "JavaScript", "microservice", "prod"],
+  "identity": "ProdStarter.Node.Express",
+  "name": "ProdStarterHub - Node Express API",
+  "shortName": "prodstarter-express",
+  "tags": {
+    "language": "JavaScript",
+    "type": "project"
+  },
+  "sourceName": "prodstarter-express",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Node",
+  "shortDescription": "A production-ready Node.js + Express template with structured logging, Prometheus metrics, health checks, and best-practice defaults.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter-express",
+      "description": "The project name (used for package.json name and docker image tags).",
+      "defaultValue": "my-express-service"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization name used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "NodeVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["18", "20"],
+      "description": "Major Node.js version to target for engines and Docker base image.",
+      "defaultValue": "18"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include production-ready multi-stage Dockerfile and docker-compose for local development.",
+      "defaultValue": true
+    },
+    "IncludeKubernetesManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include basic Kubernetes manifests and Helm chart scaffold.",
+      "defaultValue": false
+    },
+    "IncludeBullMQ": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include BullMQ worker scaffolding and example jobs for background processing.",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry bootstrap/config and example exporter configuration.",
+      "defaultValue": false
+    },
+    "IncludeGithubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for CI (lint/test/build) and optional image publish.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include test scaffold and example unit/integration tests (jest + supertest).",
+      "defaultValue": true
+    },
+    "RootPackage": {
+      "type": "computed",
+      "compute": "{ProjectName}"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "npm-install-0001",
+      "description": "Install npm dependencies (optional).",
+      "manualInstructions": [
+        {
+          "text": "Run 'npm ci' or 'npm install' in the project root to install dependencies."
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"npm ci || npm install || true\""
+      }
+    },
+    {
+      "actionId": "git-init-0002",
+      "description": "Initialize a git repository and perform initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Node Express template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Node Express template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/index.js"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy the template folder and replace placeholders or integrate with your template engine.",
+    "usageExamples": [
+      "# Copy template folder and rename\ncp -R prodstarter-express myservice && cd myservice",
+      "# Install deps and run\nnpm ci && npm start"
+    ]
+  },
+  "replaces": {
+    "prodstarter-express": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
