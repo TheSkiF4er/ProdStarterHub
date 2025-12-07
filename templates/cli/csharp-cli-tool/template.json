@@ -1,1 +1,142 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["CLI", "C#", ".NET", "tool", "prod"],
+  "identity": "ProdStarter.CSharp.Cli",
+  "name": "ProdStarterHub - C# CLI Tool",
+  "shortName": "prodstarter-csharp-cli",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ProdStarter.Cli",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.CSharp",
+  "shortDescription": "Production-ready C# CLI template using System.CommandLine and the Generic Host (Serilog, DI, hosted services, and observability hooks).",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "ProdStarter.Cli",
+      "description": "The project (assembly) name for the scaffolded CLI.",
+      "defaultValue": "MyCli"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "Company": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Company or organization used in docs and metadata.",
+      "defaultValue": "MyCompany"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "Apache-2.0"
+    },
+    "DotnetVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["8.0", "7.0"],
+      "description": "Target .NET SDK version for the project (will be used in global.json recommendation).",
+      "defaultValue": "8.0"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a multi-stage Dockerfile for reproducible builds and a minimal runtime image.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include test project scaffold (xUnit) and example tests.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for build, test, and publish.",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include optional OpenTelemetry bootstrap and configuration examples.",
+      "defaultValue": false
+    },
+    "IncludeSelfContained": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include publish presets for self-contained single-file artifacts in CI templates.",
+      "defaultValue": true
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "dotnet-restore-0001",
+      "description": "Restore dotnet packages to validate the scaffolded project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore' in the project root to fetch NuGet packages."
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"dotnet restore || true\""
+      }
+    },
+    {
+      "actionId": "dotnet-build-0002",
+      "description": "Attempt a build to ensure the scaffold compiles (non-fatal).",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet build -c Release' to compile the project."
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"dotnet build -c Release || true\""
+      }
+    },
+    {
+      "actionId": "git-init-0003",
+      "description": "Initialize a git repository and create an initial commit",
+      "manualInstructions": [
+        {
+          "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub C# CLI template\"'"
+        }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub C# CLI template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "src/ProdStarter.Cli/Program.cs"
+    }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: copy template, set ProjectName/Author/Company, and run dotnet restore/build/publish.",
+    "usageExamples": [
+      "# Copy template and rename\ncp -R csharp-cli-tool my-cli && cd my-cli",
+      "# Restore and build\ndotnet restore && dotnet build -c Release"
+    ]
+  },
+  "replaces": {
+    "ProdStarter.Cli": "{ProjectName}",
+    "ProdStarterHub": "{Company}"
+  }
+}
