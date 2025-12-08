@@ -1,1 +1,135 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["CLI", "Java", "tool", "prod"],
+  "identity": "ProdStarter.Java.Cli",
+  "name": "ProdStarterHub - Java CLI Tool",
+  "shortName": "prodstarter-java-cli",
+  "tags": {
+    "language": "Java",
+    "type": "project"
+  },
+  "sourceName": "com.prodstarter",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Java",
+  "shortDescription": "Production-ready Java CLI template using Picocli, SLF4J and lightweight metrics/health support. Includes guidance for fat-JAR, container and native-image packaging.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "prodstarter",
+      "description": "The artifact/project name for the scaffolded CLI.",
+      "defaultValue": "my-tool"
+    },
+    "GroupId": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Maven/Gradle groupId (reverse domain).",
+      "defaultValue": "com.yourorg"
+    },
+    "ArtifactId": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Maven/Gradle artifactId (project directory name).",
+      "defaultValue": "my-tool"
+    },
+    "PackageName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Base Java package for sources (will replace com.prodstarter).",
+      "defaultValue": "com.yourorg.mytool"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["Apache-2.0", "MIT", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "Apache-2.0"
+    },
+    "JavaVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["17", "21"],
+      "description": "Target Java (JDK) version for the project/CI.",
+      "defaultValue": "17"
+    },
+    "BuildTool": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["maven", "gradle"],
+      "description": "Preferred build tool for the scaffold (maven or gradle).",
+      "defaultValue": "maven"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a multi-stage Dockerfile for reproducible builds and minimal runtime images.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include unit-test scaffolding (JUnit 5 + Mockito) and example tests.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for build, test and release.",
+      "defaultValue": true
+    },
+    "IncludeNativeImage": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include example native-image profile (GraalVM) and notes. Disabled by default since it requires extra toolchain.",
+      "defaultValue": false
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "init-vcs-0001",
+      "description": "Initialize a git repository and create an initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Java CLI template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Java CLI template' || true\""
+      }
+    },
+    {
+      "actionId": "build-check-0002",
+      "description": "Attempt a quick build to validate the scaffold (maven or gradle)",
+      "manualInstructions": [
+        { "text": "Run 'mvn -q -DskipTests package' or './gradlew -q assemble' depending on your chosen build tool to verify the project builds successfully." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${BuildTool}\" = \"maven\" ]; then mvn -q -DskipTests package || true; else ./gradlew -q assemble || true; fi\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "src/main/java/com/prodstarter/Tool.java" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: set PackageName/GroupId/ArtifactId, choose build tool, and run the initial build command.",
+    "usageExamples": [
+      "# Copy template and rename\ncp -R java-cli-tool my-tool && cd my-tool\n# adjust package and build tool as needed\n# verify build\nif [ \"${BuildTool}\" = \"maven\" ]; then mvn -q -DskipTests package; else ./gradlew -q assemble; fi"
+    ]
+  },
+  "replaces": {
+    "com.prodstarter": "{PackageName}",
+    "ProdStarterHub": "{Author}",
+    "prodstarter": "{ProjectName}"
+  }
+}
