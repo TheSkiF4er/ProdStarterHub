@@ -1,1 +1,167 @@
-
+ {
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["web", "nextjs", "typescript", "saas"],
+  "identity": "ProdStarter.Nextjs.Saas.TypeScript",
+  "name": "ProdStarterHub - Next.js SaaS (TypeScript)",
+  "shortName": "prodstarter-nextjs-saas-ts",
+  "tags": {
+    "language": "TypeScript",
+    "type": "web",
+    "framework": "Next.js"
+  },
+  "sourceName": "nextjs-saas-typescript",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Web",
+  "shortDescription": "Production-ready Next.js + TypeScript SaaS template with opinionated defaults for hosting, multi-tenancy, auth, billing, observability and CI/CD.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "nextjs-saas-typescript",
+      "description": "The generated project directory / artifact name.",
+      "defaultValue": "my-saas-app"
+    },
+    "ModuleName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Package name / repository (e.g. github.com/yourorg/my-saas-app).",
+      "defaultValue": "github.com/yourorg/my-saas-app"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author or organization for metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "NodeVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["18", "20"],
+      "description": "Target Node.js LTS major version for CI/docs.",
+      "defaultValue": "18"
+    },
+    "PackageManager": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["pnpm", "npm", "yarn"],
+      "description": "Preferred package manager for the scaffold.",
+      "defaultValue": "pnpm"
+    },
+    "UseVercel": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Target Vercel platform with preview deploys and edge-first defaults.",
+      "defaultValue": true
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a multi-stage Dockerfile for containerized deployments.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for build, lint, test, preview and release.",
+      "defaultValue": true
+    },
+    "IncludePrisma": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Prisma ORM scaffold with migrations and example schema.",
+      "defaultValue": true
+    },
+    "IncludePlaywright": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Playwright E2E testing scaffold and sample tests.",
+      "defaultValue": true
+    },
+    "IncludeTRPC": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include tRPC scaffold for type-safe client/server RPC (optional).",
+      "defaultValue": false
+    },
+    "IncludeWorkers": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include background worker & queue scaffold (BullMQ) and worker Dockerfile/service definition.",
+      "defaultValue": true
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "install-deps-0001",
+      "description": "Install node dependencies (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'pnpm install' (or your chosen package manager) to install dependencies." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${PackageManager}\" = \"pnpm\" ]; then pnpm install || true; elif [ \"${PackageManager}\" = \"yarn\" ]; then yarn install --frozen-lockfile || true; else npm ci || true; fi\""
+      }
+    },
+    {
+      "actionId": "prisma-generate-0002",
+      "description": "Run Prisma generate if Prisma scaffold included (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'npx prisma generate' to generate Prisma client if Prisma is used." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${IncludePrisma}\" = \"true\" ]; then command -v npx >/dev/null 2>&1 && npx prisma generate || true; fi\""
+      }
+    },
+    {
+      "actionId": "build-check-0003",
+      "description": "Attempt a quick build to validate scaffold (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'pnpm build' (or npm run build) to verify the project builds successfully." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ -f package.json ]; then if [ \"${PackageManager}\" = \"pnpm\" ]; then pnpm -s build || true; elif [ \"${PackageManager}\" = \"yarn\" ]; then yarn build || true; else npm run build || true; fi; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0004",
+      "description": "Initialize a git repository and create an initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Next.js SaaS template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Next.js SaaS template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "package.json" },
+    { "path": "next.config.js" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize generation: set ModuleName, ProjectName and choose PackageManager. Toggle Prisma, Playwright, TRPC, and workers. After generation run the install command and verify the build.",
+    "usageExamples": [
+      "# Example usage\ncp -R nextjs-saas-typescript my-saas && cd my-saas\n# install deps\npnpm install\n# run prisma generate (if used)\nnpx prisma generate\n# build\npnpm build"
+    ]
+  },
+  "replaces": {
+    "nextjs-saas-typescript": "{ProjectName}",
+    "github.com/example/nextjs-saas-typescript": "{ModuleName}",
+    "ProdStarterHub": "{Author}"
+  }
+}
