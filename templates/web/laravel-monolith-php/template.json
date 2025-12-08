@@ -1,1 +1,160 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["web", "php", "laravel", "monolith"],
+  "identity": "ProdStarter.Laravel.Monolith",
+  "name": "ProdStarterHub - Laravel Monolith (PHP)",
+  "shortName": "prodstarter-laravel-monolith",
+  "tags": {
+    "language": "PHP",
+    "type": "web"
+  },
+  "sourceName": "laravel-monolith-php",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Web",
+  "shortDescription": "Production-ready Laravel monolith template with secure defaults, queues (Horizon), observability, asset pipeline and deployment guides.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "laravel-monolith-php",
+      "description": "The project directory / artifact name for the scaffolded Laravel app.",
+      "defaultValue": "my-laravel-app"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author or organization name for metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "PHPVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["8.1", "8.2", "8.3"],
+      "description": "Target PHP version for CI & runtime (major.minor).",
+      "defaultValue": "8.1"
+    },
+    "DBChoice": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["mysql", "pgsql"],
+      "description": "Primary relational database for the scaffold (MySQL or Postgres).",
+      "defaultValue": "pgsql"
+    },
+    "PackageManager": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["composer", "composer (with composer2)"],
+      "description": "PHP package manager to use.",
+      "defaultValue": "composer"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a hardened multi-stage Dockerfile and docker-compose dev setup.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions CI pipeline templates for lint, test, build and scan.",
+      "defaultValue": true
+    },
+    "IncludeHorizon": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Laravel Horizon configuration and example Supervisor config for workers.",
+      "defaultValue": false
+    },
+    "IncludeK8sManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include example Kubernetes manifests for web and worker deployments (Helm/simple YAML).",
+      "defaultValue": false
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include PHPUnit test scaffold and example Feature/Unit tests.",
+      "defaultValue": true
+    },
+    "IncludeVite": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Vite config and frontend asset pipeline scaffolding.",
+      "defaultValue": true
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "composer-install-0001",
+      "description": "Install PHP dependencies (composer install) — non-fatal",
+      "manualInstructions": [
+        { "text": "Run 'composer install --no-interaction' to install PHP dependencies." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if command -v composer >/dev/null 2>&1; then composer install --no-interaction || true; fi\""
+      }
+    },
+    {
+      "actionId": "npm-install-build-0002",
+      "description": "Install Node dependencies and build frontend assets (if Vite included) — non-fatal",
+      "manualInstructions": [
+        { "text": "Run 'npm ci && npm run build' to install and build frontend assets if applicable." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${IncludeVite}\" = \"true\" ]; then if command -v npm >/dev/null 2>&1; then npm ci && npm run build || true; fi; fi\""
+      }
+    },
+    {
+      "actionId": "artisan-keygen-0003",
+      "description": "Generate application key (artisan key:generate) — non-fatal",
+      "manualInstructions": [
+        { "text": "Run 'php artisan key:generate' to set APP_KEY in .env (or configure in your secrets manager)." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if command -v php >/dev/null 2>&1 && [ -f artisan ]; then php artisan key:generate --ansi || true; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0004",
+      "description": "Initialize a git repository and create an initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Laravel monolith template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Laravel monolith template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "composer.json" },
+    { "path": "artisan" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize generation: set ProjectName, Author, choose PHP version and DB engine. Toggle CI, Docker, Horizon and K8s manifest inclusion.",
+    "usageExamples": [
+      "# Copy template and rename\ncp -R laravel-monolith-php my-app && cd my-app\n# install deps\ncomposer install && npm ci && php artisan key:generate\n# run locally using Docker Compose\ndocker compose up -d\n"
+    ]
+  },
+  "replaces": {
+    "laravel-monolith-php": "{ProjectName}",
+    "ProdStarterHub": "{Author}"
+  }
+}
