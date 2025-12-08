@@ -1,1 +1,134 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["service", "go", "rest", "http"],
+  "identity": "ProdStarter.Go.ChiRest",
+  "name": "ProdStarterHub - Go chi REST Service",
+  "shortName": "prodstarter-go-chi-rest",
+  "tags": {
+    "language": "Go",
+    "type": "service"
+  },
+  "sourceName": "go-chi-rest",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Go",
+  "shortDescription": "Production-ready Go REST service template (chi, zap, viper, prometheus) with sensible defaults for config, logging, metrics and packaging.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "go-chi-rest",
+      "description": "The project directory / artifact name for the scaffolded service.",
+      "defaultValue": "my-service"
+    },
+    "ModuleName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Go module name (e.g. github.com/yourorg/my-service).",
+      "defaultValue": "github.com/yourorg/my-service"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author or organization name for project metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "GoVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["1.20", "1.21", "1.22"],
+      "description": "Go toolchain version to target in CI & docs.",
+      "defaultValue": "1.20"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a multi-stage Dockerfile for reproducible builds.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include unit/integration test scaffold and example tests.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for build, lint, test and release.",
+      "defaultValue": true
+    },
+    "IncludeMetrics": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Prometheus metrics server example and flags.",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry bootstrap and config examples (optional).",
+      "defaultValue": false
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "gomod-tidy-0001",
+      "description": "Run 'go mod tidy' to ensure dependencies are resolved",
+      "manualInstructions": [
+        { "text": "Run 'go mod tidy' in the project root to fetch and prune module dependencies." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"go mod tidy || true\""
+      }
+    },
+    {
+      "actionId": "go-build-0002",
+      "description": "Attempt a local build to verify the scaffold compiles",
+      "manualInstructions": [
+        { "text": "Run 'go build ./...' or 'make build' to verify the project builds successfully." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"go build ./... || true\""
+      }
+    },
+    {
+      "actionId": "git-init-0003",
+      "description": "Initialize a git repository and create an initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Go chi REST template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Go chi REST template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "cmd/server/main.go" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize project generation. Typical usage: set ModuleName to your module path, set ProjectName, and run 'go mod tidy' and 'go build'.",
+    "usageExamples": [
+      "# Initialize project and build\ncp -R go-chi-rest my-service && cd my-service\n# set module name\ngo mod init github.com/yourorg/my-service\n# tidy and build\ngo mod tidy\ngo build ./..."
+    ]
+  },
+  "replaces": {
+    "go-chi-rest": "{ProjectName}",
+    "github.com/example/go-chi-rest": "{ModuleName}",
+    "ProdStarterHub": "{Author}" 
+  }
+}
