@@ -1,1 +1,141 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["service", "node", "typescript", "rest"],
+  "identity": "ProdStarter.Node.Service.TypeScript",
+  "name": "ProdStarterHub - Node TypeScript REST Service",
+  "shortName": "prodstarter-node-ts",
+  "tags": {
+    "language": "TypeScript",
+    "type": "service"
+  },
+  "sourceName": "node-service-typescript",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Node",
+  "shortDescription": "Production-ready Node.js + TypeScript REST template (Express, Pino, Prometheus) with sensible defaults for config, logging, metrics and reproducible builds.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "node-service-typescript",
+      "description": "The generated project directory / artifact name.",
+      "defaultValue": "my-node-service"
+    },
+    "ModuleName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Package name / repository (e.g. github.com/yourorg/my-node-service).",
+      "defaultValue": "github.com/yourorg/my-node-service"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author or organization for metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "NodeVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["18", "20"],
+      "description": "Target Node.js LTS major version for CI/docs.",
+      "defaultValue": "18"
+    },
+    "PackageManager": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["npm", "pnpm", "yarn"],
+      "description": "Preferred package manager for the scaffold.",
+      "defaultValue": "npm"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a multi-stage Dockerfile for reproducible builds.",
+      "defaultValue": true
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include unit & integration test scaffolding (Jest/Vitest).",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions workflows for build, lint, test and release.",
+      "defaultValue": true
+    },
+    "IncludeMetrics": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Prometheus metrics scaffolding (prom-client).",
+      "defaultValue": true
+    },
+    "IncludeOpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include OpenTelemetry bootstrap examples (optional).",
+      "defaultValue": false
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "install-deps-0001",
+      "description": "Install node dependencies (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'npm ci' or the equivalent for your chosen package manager (pnpm install / yarn install) to install dependencies." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ \"${PackageManager}\" = \"pnpm\" ]; then pnpm install || true; elif [ \"${PackageManager}\" = \"yarn\" ]; then yarn install --frozen-lockfile || true; else npm ci || true; fi\""
+      }
+    },
+    {
+      "actionId": "build-check-0002",
+      "description": "Attempt a quick type-check/build to validate the scaffold (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'npm run type-check' or 'npm run build' to verify the project compiles successfully." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ -f package.json ]; then if [ \"${PackageManager}\" = \"pnpm\" ]; then pnpm -s run type-check || pnpm -s run build || true; elif [ \"${PackageManager}\" = \"yarn\" ]; then yarn type-check || yarn build || true; else npm run type-check || npm run build || true; fi; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0003",
+      "description": "Initialize git repository and create initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Node TypeScript template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Node TypeScript template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "src/index.ts" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize generation: set ModuleName, ProjectName and choose PackageManager. After generation run the install command for your package manager and verify the build.",
+    "usageExamples": [
+      "# Example usage\ncp -R node-service-typescript my-service && cd my-service\n# set module name in package.json and run\nnpm ci\n# type-check and build\nnpm run type-check && npm run build"
+    ]
+  },
+  "replaces": {
+    "node-service-typescript": "{ProjectName}",
+    "github.com/example/node-service-typescript": "{ModuleName}",
+    "ProdStarterHub": "{Author}"
+  }
+}
