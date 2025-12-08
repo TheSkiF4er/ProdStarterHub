@@ -1,1 +1,156 @@
-
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TheSkiF4er",
+  "classifications": ["web", "ruby", "rails", "marketplace"],
+  "identity": "ProdStarter.Rails.Marketplace",
+  "name": "ProdStarterHub - Rails Marketplace (Ruby)",
+  "shortName": "prodstarter-rails-marketplace",
+  "tags": {
+    "language": "Ruby",
+    "type": "web",
+    "framework": "Rails"
+  },
+  "sourceName": "rails-marketplace-ruby",
+  "preferNameDirectory": true,
+  "groupIdentity": "ProdStarter.Web",
+  "shortDescription": "Production-ready Ruby on Rails marketplace template with payments, Sidekiq workers, observability hooks, and deployment guides.",
+  "symbols": {
+    "ProjectName": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "rails-marketplace-ruby",
+      "description": "The generated project directory / artifact name.",
+      "defaultValue": "my-marketplace"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Author or organization for metadata.",
+      "defaultValue": "Your Name"
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["MIT", "Apache-2.0", "Proprietary"],
+      "description": "License for the generated project.",
+      "defaultValue": "MIT"
+    },
+    "RubyVersion": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["3.1", "3.2"],
+      "description": "Target Ruby version for CI & runtime.",
+      "defaultValue": "3.1"
+    },
+    "DBChoice": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["postgresql", "mysql"],
+      "description": "Primary relational database for the scaffold.",
+      "defaultValue": "postgresql"
+    },
+    "PackageManager": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": ["bundler"],
+      "description": "Ruby package manager to use.",
+      "defaultValue": "bundler"
+    },
+    "IncludeDocker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include a hardened multi-stage Dockerfile and docker-compose dev setup.",
+      "defaultValue": true
+    },
+    "IncludeCI": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include GitHub Actions CI pipeline templates for lint, test, build and scan.",
+      "defaultValue": true
+    },
+    "IncludeSidekiq": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include Sidekiq configuration, example workers and supervisor examples.",
+      "defaultValue": true
+    },
+    "IncludeK8sManifests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include example Kubernetes manifests / Helm snippets for web + worker + migration job.",
+      "defaultValue": false
+    },
+    "IncludeTests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include RSpec / system test scaffold and example specs.",
+      "defaultValue": true
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "bundle-install-0001",
+      "description": "Install Ruby gems with Bundler (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'bundle install' to install Ruby dependencies." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if command -v bundle >/dev/null 2>&1; then bundle install || true; fi\""
+      }
+    },
+    {
+      "actionId": "yarn-install-0002",
+      "description": "Install JS dependencies and build assets (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'yarn install && yarn build' (or npm equivalent) to install and build frontend assets." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if [ -f package.json ]; then command -v yarn >/dev/null 2>&1 && (yarn install --frozen-lockfile && yarn build) || true; fi\""
+      }
+    },
+    {
+      "actionId": "db-setup-0003",
+      "description": "Create and migrate database, and run seeds (non-fatal).",
+      "manualInstructions": [
+        { "text": "Run 'bundle exec rails db:create db:migrate db:seed' to prepare local database." }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"if command -v bundle >/dev/null 2>&1 && [ -f Rakefile ]; then bundle exec rails db:create db:migrate db:seed || true; fi\""
+      }
+    },
+    {
+      "actionId": "git-init-0004",
+      "description": "Initialize git repository and create initial commit",
+      "manualInstructions": [
+        { "text": "Run 'git init && git add . && git commit -m \"Initial scaffold from ProdStarterHub Rails marketplace template\"'" }
+      ],
+      "continueOnError": true,
+      "args": {
+        "executable": "bash",
+        "args": "-lc \"git init && git add . && git commit -m 'Initial scaffold from ProdStarterHub Rails marketplace template' || true\""
+      }
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "Gemfile" },
+    { "path": "Rakefile" },
+    { "path": "bin/rails" }
+  ],
+  "baselineVersion": "1.0.0",
+  "symbolsHelp": {
+    "description": "Customize generation: set ProjectName, Author, choose DB engine and toggle Sidekiq, Docker and CI. After generation run the install commands and verify the app boots locally.",
+    "usageExamples": [
+      "# Example usage\ncp -R rails-marketplace-ruby my-marketplace && cd my-marketplace\n# install deps\nbundle install && yarn install\n# setup DB\nbundle exec rails db:create db:migrate db:seed\n# start dev server\nbundle exec rails s"
+    ]
+  },
+  "replaces": {
+    "rails-marketplace-ruby": "{ProjectName}",
+    "ProdStarterHub": "{Author}"
+  }
+}
